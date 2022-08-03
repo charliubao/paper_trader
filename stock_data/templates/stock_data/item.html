@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>{{ header }}</title>
+    <link href="{% static 'index/styles.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+    <div id="navbar" class="sticky">
+        <a href="home">Home</a>
+        <a href="logout">Log Out</a>
+        <a href="/stock_data">Back to Stocks</a>
+
+    </div>
+
+    <div class="content">
+        <h1>{{ header }}</h1>
+        <h3> Updates since {{ now }}</h3>
+
+        <table class="item_table">
+                <tr class="item_heading">
+                    {% for key in keys %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+
+                <tr class="item_data">
+                    {% for value in values %} 
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+        </table>
+
+        <br>
+        <form>
+            <label for="purchase"><b>How many shares would you like to purchase?</b></label>
+            <input type="number" name="purchase" min="0">
+                
+            <button type="submit" >Buy</button> <br>
+        </form>
+    </div>
+
+{% endblock body %}

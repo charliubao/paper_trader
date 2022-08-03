@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Searched</title>
+    <link href="{% static 'index/styles.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+    <div id="navbar" class="sticky">
+        <a href="home">Home</a>
+        <a href="logout">Log Out</a>
+        <a href="/stock_data">Back to Stocks</a>
+
+    </div>
+
+    <div class="content">
+        <h1>Results for "{{ searched }}"</h1>
+
+        <table>
+            <tr>
+                <th>Company Name</th>
+                <th>Symbol</th>
+                <th>Industry</th>
+                <th>Last Sale</th>
+                <th>Percent Change</th>
+                <th>Absolute Change</th>
+            <th>Market Cap</th>
+            </tr>
+            {% for row, color, name in data %} 
+                {% if color %}
+                    <tr class="green">
+                        <td>
+                            <a href=/stock_data/name/{{ name }}>{{ row.name }}</a>
+                        </td>
+                        <td>{{ row.symbol }}</td>
+                        <td>{{ row.industry }}</td>
+                        <td>{{ row.lastsale }}</td>
+                        <td>{{ row.pctchange }}</td>
+                        <td>{{ row.netchange }}</td>
+                        <td>{{ row.marketCap }}</td>
+                    </tr>
+                {% else %} 
+                    <tr class="red">
+                        <td><a href=/stock_data/name/{{ name }}>{{ row.name }}</a></td>
+                        <td>{{ row.symbol }}</td>
+                        <td>{{ row.industry }}</td>
+                        <td>{{ row.lastsale }}</td>
+                        <td>{{ row.pctchange }}</td>
+                        <td>{{ row.netchange }}</td>
+                        <td>{{ row.marketCap }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock body %}

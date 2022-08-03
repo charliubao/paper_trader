@@ -1,0 +1,118 @@
+table {
+    width: 100%;
+}
+
+h1, h3, th {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+th {
+    text-align: left;
+}
+
+
+table, th, nav {
+    padding: 3px;
+    margin: 3px;
+}
+
+.search_stock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search_bar {
+    border-radius: 15px;
+    border-width: 1px;
+    width: 15%;
+    height: 30px;
+    margin: 15px;
+    font-size: 14px;
+    text-indent: 6px;
+}
+
+button {
+    width: 5%;
+    border-radius: 10;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+
+.green, .green a {
+    color: green;
+    text-decoration: none;
+}
+
+.red, .red a {
+    color: red;
+    text-decoration: none;
+}
+
+nav {
+    text-align: center;
+}
+
+nav > a {
+    color: blue;
+    font-family: sans-serif;
+    margin: 5px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#navbar {
+    overflow: hidden;
+    background-color: #333;
+    margin: 0;
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.content {
+    padding-top: 50px;
+}
+
+.backtotop {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+}
+
+.backtotop a {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    border: 1px solid cornflowerblue;
+}
+
+.item_heading, .item_data {
+    text-align: center;
+}
+
+.item_heading {
+    font-size: 15px;
+}
+
+.item_data {
+    font-size: 20px;
+}
