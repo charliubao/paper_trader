@@ -9,12 +9,12 @@
 {% block body %}
     <div id="navbar" class="sticky">
         <a href="/accounts/homepage">Home</a>
+        <a href="{% url 'index' %}">Back to Stocks</a>
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">Log Out</a>
         {% else %}
             <a href="{% url 'login' %}">Log In</a>
         {% endif %}
-        <a href="{% url 'index' %}">Back to Stocks</a>
 
     </div>
 

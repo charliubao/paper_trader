@@ -4,19 +4,18 @@
 {% block head %}
     <title>{{ header }}</title>
     <link href="{% static 'index/styles.css' %}" rel="stylesheet">
-    <meta http-equiv="refresh" content="2; url = {% url 'index' %}" />
+    <meta http-equiv="refresh" content="1; url = {% url 'index' %}" />
 {% endblock head %}
 
 {% block body %}
     <div id="navbar" class="sticky">
         <a href="/accounts/homepage">Home</a>
+        <a href="{% url 'index' %}">Back to Stocks</a>
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">Log Out</a>
         {% else %}
             <a href="{% url 'login' %}">Log In</a>
         {% endif %}
-        <a href="{% url 'index' %}">Back to Stocks</a>
-
     </div>
     <div class="content">
         <h1>You Bought Stocks! Purchase Complete!</h1>

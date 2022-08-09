@@ -1,0 +1,40 @@
+{% extends 'base_navbar.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Transaction History</title>
+    <link href="{% static 'accounts/styles.css' %}" rel="stylesheet">
+{% endblock head%}
+
+{% block body %}
+    <div id="navbar" class="sticky">
+        <a href="{% url 'index' %}">Pick Stocks</a>
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'sell' %}">Sell</a>
+        <a href="{% url 'add_balance' %}">Add Balance</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+
+
+    </div>
+
+    <img src="{% static 'accounts/img/paper.jpeg' %}" alt="Paper Background">
+    <div class="history_header"><h2>Transaction History</h2></div>
+
+    <table class="history_table">
+        <tr>
+            <th>Asset</th>
+            <th>Original Price</th>
+            <th>Total Value</th>
+            <th>Purchase Time</th>
+        </tr>
+        {% for test in items %}
+        <tr>
+            <td>{{ test.stock }}</td>
+            <td>{{ test.original_price }}</td>
+            <td>{{ test.total }}</td>
+            <td>{{ test.purchase_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock body %}

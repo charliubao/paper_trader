@@ -8,7 +8,7 @@ from django.urls import reverse
 from .forms import PurchaseForm
 from django.utils import timezone
 from django.db import models
-from accounts.models import Profile
+from accounts.models import Profile, HistoryTrack
 from django.contrib import messages
 
 # Create your views here.
@@ -72,14 +72,15 @@ def item(request, name):
                 user_profile.save()
                 instance = form.save(commit=False)
                 instance.owner = request.user
-                instance.name = name
-                original_price = float(item_data[0]['lastsale'][1:])
-                price_now = float(item_data[0]['lastsale'][1:])
-                purchase_time = models.DateTimeField(default=timezone.now)
-                messages.success(request, 'Purchase Complete!')
+                instance.name = header
+                instance.original_price = price
+                instance.price_now = price
+                HistoryTrack.objects.create(profile=user_profile, stock=header, original_price=price, total=num*price, purchase_time=instance.purchase_time)
+                form.save()
+                messages.success(request, 'Purchase Successful!')
                 return render(request, 'stock_data/purchase.html', {})
             else:
-                messages.error(request, 'Insufficient Funds, Unable to Process Transaction. Please Deposit Cash') 
+                messages.error(request, 'Insufficient Funds, Unable to Process Transaction. Please Add Balance') 
                 form = PurchaseForm()
                 return render(request, 'stock_data/item.html', {
                     "keys" : keys, "values" : values, "now" : time_helper(), "header" : header,  "form" : form

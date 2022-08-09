@@ -1,0 +1,36 @@
+{% extends 'base_navbar.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Add Balance</title>
+    <link href="{% static 'accounts/styles.css' %}" rel="stylesheet">
+{% endblock head%}
+
+{% block body %}
+    <div id="navbar" class="sticky">
+        <a href="{% url 'index' %}">Pick Stocks</a>
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'sell' %}">Sell</a>
+        <a href="{% url 'history' %}">Transaction History</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+
+
+    </div>
+
+    <img src="{% static 'accounts/img/paper.jpeg' %}" alt="Paper Background">
+    <div class="username_header"><h2>hello, {{ user.username }}</h2></div>
+    <div class="balance">
+        <h3>Your balance is ${{ user.profile.cash }}</h3>
+        <h3>Total Asset Value: {{ total }}</h3>
+    </div>
+    <div class="add_balance">
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="amount"><b>Add Amount: $</b></label>
+        <input type="number" name="amount" required> <br>
+            
+        <button type="submit">Add</button> <br>
+    </form>
+    </div>
+
+{% endblock body %}

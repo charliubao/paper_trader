@@ -6,7 +6,7 @@ from django.conf import settings
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name="profile", null=True, on_delete=models.CASCADE)
     cash = models.FloatField(default=10000, validators=[MaxValueValidator(1000000000), MinValueValidator(50)])
     # puchases = models.ManyToMany(Purchase, blank=True)
 
@@ -24,10 +24,17 @@ class Profile(models.Model):
             return True
         return False
 
-class Purchase (models.Model):
+class Purchase(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=300)
     quantity = models.PositiveIntegerField(blank=False)
     original_price = models.FloatField()
     price_now = models.FloatField()
     purchase_time = models.DateTimeField(default=timezone.now)
+
+class HistoryTrack(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    stock = models.CharField(max_length=300)
+    original_price = models.FloatField()
+    total = models.FloatField()
+    purchase_time = models.DateTimeField(null=False)

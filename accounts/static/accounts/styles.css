@@ -29,7 +29,51 @@ img {
 
 .total_assets {
     position: absolute;
-    top: 120px;
-    left: 14px;
+    top: 30%;
+    left: 20px;
     font-size: 17px;
+    width: 80%;
+    text-align: center;
+}
+
+td, .history_table th {
+    padding: 5px;
+    border: solid gray;
+    border-style: inset;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.balance {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+}
+
+.no_stocks {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    color: darkred;
+}
+
+.add_balance {
+    position: absolute;
+    top: 32%;
+    left: 16px;
+}
+
+.history_header {
+    display: flex;
+    justify-content: center;
+    top: 50px;
+    font-size: 18px;
+}
+
+.history_table {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
