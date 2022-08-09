@@ -1,0 +1,27 @@
+{% extends 'base_navbar.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Home Page</title>
+    <link href="{% static 'accounts/styles.css' %}" rel="stylesheet">
+{% endblock head%}
+
+{% block body %}
+    <div id="navbar" class="sticky">
+        <a href="{% url 'index' %}">Pick Stocks</a>
+        <a href="{% url 'logout' %}">Log Out</a>
+    </div>
+
+    <img src="{% static 'accounts/img/paper.jpeg' %}" alt="Paper Background">
+    <div class="username_header"><h2>hello, {{ user.username }}</h2></div>
+    <table class="total_assets">
+        <tr>
+            <th>You have ${{ user.profile.cash }} in cash.</th>
+        </tr>
+        <tr>
+            <td>test</td>
+        </tr>
+    </table>
+        
+
+{% endblock body %}

@@ -1,0 +1,35 @@
+.container a {
+    text-decoration: none;
+    color: blue;
+}
+
+.container {
+    padding: 10px;
+    margin: 3px;
+}
+
+input, button {
+    margin: 4px;
+}
+  
+img { 
+    position: absolute;
+    top: 43px;
+    width: 100%;
+    height: auto;
+    opacity: 0.3;
+}
+
+.username_header {
+    position: absolute;
+    top: 50px;
+    left: 16px;
+    font-size: 18px;
+}
+
+.total_assets {
+    position: absolute;
+    top: 120px;
+    left: 14px;
+    font-size: 17px;
+}

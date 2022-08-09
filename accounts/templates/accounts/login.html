@@ -1,7 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_navbar.html' %}
+{% load static %}
 
 {% block head %}
-    <title> Log In</title>
+    <title>Log In</title>
+    <link href="{% static 'accounts/styles.css' %}" rel="stylesheet">
+
 {% endblock head %}
 
 {% block body %}
@@ -16,13 +19,11 @@
             <input type="password" name="password" required> <br>
                 
             <button type="submit">Login</button> <br>
-            <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
         </div>
 
         <div class="container">
-            <span class="psw">Forgot <a href="#">password?</a></span>
+            <a href="{% url 'register' %}">Don't Have an Account? Sign Up!</a> <br>
+            <a href="">Forgot password?</a>
         </div>
     </form>
 {% endblock body %}

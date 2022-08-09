@@ -12,5 +12,6 @@ urlpatterns = [
     path("search", views.search, name="search"),
     path("tag/<str:letter>", views.letter, name="letter"),
     path("name/<str:name>", views.item, name='item'),
+    # path("purchase/", views.purchase, name='purchase'),
 ]
 

@@ -1,0 +1,26 @@
+{% extends 'base_navbar.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Sign Up</title>
+    <link href="{% static 'accounts/styles.css' %}" rel="stylesheet">
+
+{% endblock head %}
+
+{% block body %}
+    <h1>Sign Up</h1>
+    <form action="" method=POST>
+        {% csrf_token %}
+        <!-- <div class="container">
+            <label for="username"><b>Username</b></label>
+            <input type="text" name="username" required> <br>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" name="password" required> <br> -->
+
+        {{ form }}
+            
+        <button type="submit">Sign Up</button> <br>
+        <!-- </div> -->
+    </form>
+{% endblock body %}

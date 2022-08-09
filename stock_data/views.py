@@ -5,6 +5,11 @@ import datetime
 import pytz
 from django.views.generic import RedirectView
 from django.urls import reverse
+from .forms import PurchaseForm
+from django.utils import timezone
+from django.db import models
+from accounts.models import Profile
+from django.contrib import messages
 
 # Create your views here.
 stocks = scrape.data['data']['rows']
@@ -46,19 +51,44 @@ def red_green(nums):
 
 def underscore_names(stocks):
     stocknames = [x['name'] for x in stocks]
-    translate_table = str.maketrans({' ': '_', ',': '_', '.':'_'})
+    translate_table = str.maketrans({' ': '_', ',': '_', '.':'_', '/':'_'})
     underscore_names = [name.translate(translate_table) for name in stocknames]
     return underscore_names
 
 def item(request, name):
-    translate_table = str.maketrans({' ': '_', ',': '_', '.':'_'})
+    translate_table = str.maketrans({' ': '_', ',': '_', '.':'_', '/':'_'})
     item_data  = [x for x in stocks if x['name'].translate(translate_table) == name]
     keys = list(item_data[0].keys())
     values = list(item_data[0].values())
     header = item_data[0]['name']
-    return render(request, 'stock_data/item.html', {
-        "keys" : keys, "values" : values, "now" : time_helper(), "header" : header
-    })
+    user_profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            num = form.cleaned_data.get("quantity")
+            price = round(float(item_data[0]['lastsale'][1:]), 2)
+            if user_profile.can_purchase(num*price):
+                user_profile.withdraw(num*price)
+                user_profile.save()
+                instance = form.save(commit=False)
+                instance.owner = request.user
+                instance.name = name
+                original_price = float(item_data[0]['lastsale'][1:])
+                price_now = float(item_data[0]['lastsale'][1:])
+                purchase_time = models.DateTimeField(default=timezone.now)
+                messages.success(request, 'Purchase Complete!')
+                return render(request, 'stock_data/purchase.html', {})
+            else:
+                messages.error(request, 'Insufficient Funds, Unable to Process Transaction. Please Deposit Cash') 
+                form = PurchaseForm()
+                return render(request, 'stock_data/item.html', {
+                    "keys" : keys, "values" : values, "now" : time_helper(), "header" : header,  "form" : form
+                })
+    else:
+        form = PurchaseForm()
+        return render(request, 'stock_data/item.html', {
+            "keys" : keys, "values" : values, "now" : time_helper(), "header" : header,  "form" : form
+        })
 
 def search(request):
     if request.method == "POST":

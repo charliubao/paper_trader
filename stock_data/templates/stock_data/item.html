@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'item_base.html' %}
 {% load static %}
 
 {% block head %}
@@ -8,15 +8,19 @@
 
 {% block body %}
     <div id="navbar" class="sticky">
-        <a href="home">Home</a>
-        <a href="logout">Log Out</a>
-        <a href="/stock_data">Back to Stocks</a>
+        <a href="/accounts/homepage">Home</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Log Out</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+        <a href="{% url 'index' %}">Back to Stocks</a>
 
     </div>
 
     <div class="content">
         <h1>{{ header }}</h1>
-        <h3> Updates since {{ now }}</h3>
+        <h3> Updates since {{ now }} EST</h3>
 
         <table class="item_table">
                 <tr class="item_heading">
@@ -33,11 +37,13 @@
         </table>
 
         <br>
-        <form>
-            <label for="purchase"><b>How many shares would you like to purchase?</b></label>
-            <input type="number" name="purchase" min="0">
-                
-            <button type="submit" >Buy</button> <br>
+        <form action="" method=POST>
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            
+            <input type="submit" value="Purchase" class="btn">
+
         </form>
     </div>
 

@@ -8,9 +8,13 @@
 
 {% block body %}
     <div id="navbar" class="sticky">
-        <a href="home">Home</a>
-        <a href="logout">Log Out</a>
-        <a href="/stock_data">Back to Stocks</a>
+        <a href="{% url 'homepage' %}">Home</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Log Out</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+        <a href="{% url 'index' %}">Back to Stocks</a>
 
     </div>
 

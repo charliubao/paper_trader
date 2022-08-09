@@ -9,13 +9,17 @@
 {% block body %}
 
     <div id="navbar" class="sticky">
-        <a href="#home">Home</a>
-        <a href="#logout">Log Out</a>
+        <a href="{% url 'homepage' %}">Home</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Log Out</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
     </div>
 
         <div class="content">
         <h1>NASDAQ Stocks</h1>
-        <h3> Updates since {{ now }}</h3>
+        <h3> Updates since {{ now }} EST</h3>
 
         <form class="search_stock" method="POST" action="{% url 'search' %}" >
             {% csrf_token %}

@@ -84,7 +84,10 @@ nav > a {
 }
 
 .content {
-    padding-top: 50px;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    height: auto;
 }
 
 .backtotop {
